@@ -1,7 +1,6 @@
 # levels/level_manager.py
 from levels.grid_parser import LevelParser
 
-# Reconstrucción del Nivel 1 A* basado en las restricciones de 10x10
 LEVEL_1_STR = """
 ....#..G.E
 .....#....
@@ -15,10 +14,58 @@ LEVEL_1_STR = """
 P....#....
 """
 
+LEVEL_2_STR = """
+.....G...E
+..##...#..
+...#..#...
+....#.#...
+.#...##...
+##.#.###..
+.#........
+.##..#..#.
+..........
+P....#....
+"""
+
+LEVEL_3_STR = """
+......#..E
+......#G..
+......#...
+..#....#..
+....#.....
+.##..#....
+..#.......
+...##.....
+.#...#....
+P.........
+"""
+
+LEVELS = {
+    1: LEVEL_1_STR,
+    2: LEVEL_2_STR,
+    3: LEVEL_3_STR,
+}
+
 class LevelManager:
     def __init__(self):
         self.current_level = 1
-        self.parser = LevelParser(LEVEL_1_STR)
+        self.max_levels = len(LEVELS)
+        self.parser = LevelParser(LEVELS[self.current_level])
+
+    def load_level(self, level_number):
+        if level_number in LEVELS:
+            self.current_level = level_number
+            self.parser = LevelParser(LEVELS[self.current_level])
+            return True
+        return False
+
+    def next_level(self):
+        if self.current_level < self.max_levels:
+            return self.load_level(self.current_level + 1)
+        return False
+
+    def reset(self):
+        self.load_level(1)
 
     def get_current_grid(self):
         return self.parser.grid
