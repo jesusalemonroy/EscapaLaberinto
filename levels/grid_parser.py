@@ -37,7 +37,7 @@ class LevelParser:
             self.grid.append(grid_row)
 
     def is_obstacle(self, x, y):
-        """Devuelve True si la celda (x, y) contiene un obstáculo (#)[cite: 1]."""
+        """Devuelve True si la celda (x, y) contiene un obstáculo (#)."""
         if 0 <= x < 10 and 0 <= y < 10:
             return self.grid[y][x] == '#'
         return True # Fuera de límites se considera obstáculo

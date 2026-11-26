@@ -41,3 +41,4 @@ cover/
 dmypy.json
 .pyre/
 .pytype/
+.vscode/
